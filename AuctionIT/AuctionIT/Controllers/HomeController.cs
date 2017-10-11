@@ -26,5 +26,9 @@ namespace AuctionIT.Controllers
 
             return View();
         }
+        public ActionResult MasterTable()
+        {
+            return View();
+        }
     }
 }

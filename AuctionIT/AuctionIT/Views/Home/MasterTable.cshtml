@@ -1,0 +1,24 @@
+﻿
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myDataTable').DataTable();
+    });
+</script>
+<head>
+
+</head>
+@{
+    ViewBag.Title = "MasterTable";
+}
+
+<table id="myDataTable" class="display">
+    <thead>
+        <tr>
+            <th>Auction Number</th>
+            <th>Description</th>
+            <th>Current Winning Bidder Number</th>
+            <th>Current Winning Bid</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table> 
