@@ -1,7 +1,28 @@
-﻿
+﻿@using AuctionIT.Models
+@model IEnumerable<AuctionItem>
+
 <script type="text/javascript">
+
     $(document).ready(function () {
-        $('#myDataTable').DataTable();
+        $('#myDataTable tfoot th').each(function () {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+        });
+        var table = $('#myDataTable').DataTable(
+            {
+                "dom": 't'
+            });
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
     });
 </script>
 <head>
@@ -20,5 +41,23 @@
             <th>Current Winning Bid</th>
         </tr>
     </thead>
-    <tbody></tbody>
+    <tfoot>
+        <tr>
+            <th>Auction Number</th>
+            <th>Description</th>
+            <th>Current Winning Bidder Number</th>
+            <th>Current Winning Bid</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (AuctionItem item in Model)
+        {
+            <tr>
+                <td>@item.itemID</td>
+                <td>@item.description</td>
+                <td>@item.currentWinningBidder</td>
+                <td>@item.currentWinningBid</td>
+            </tr>
+        }
+    </tbody>
 </table> 
